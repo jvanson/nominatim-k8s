@@ -1,0 +1,32 @@
+templates:
+  - ingress.yaml
+release:
+  name: nominatim-test
+tests:
+  - it: should render nothing if not enabled
+    set:
+      ingress.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: Should have sane defaults
+    set:
+      ingress.enabled: true
+      ingress.hosts:
+        - host: foobar.com
+    asserts:
+      - hasDocuments:
+          count: 1
+      - equal:
+          path: metadata.name
+          value: nominatim-test
+      - isNull:
+          path: metadata.annotations
+      - isNull:
+          path: spec.tls
+      - contains:
+          path: spec.rules[0].http.paths
+          content:
+            backend:
+              serviceName: nominatim-test
+              servicePort: http
