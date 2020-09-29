@@ -35,7 +35,7 @@ Then point your web browser to [http://localhost:8080/](http://localhost:8080/)
 ### Explanation
 
 #### Installing Chart
-- `helm repo add jobvite-nominatim https://jobvite-inc.github.io/nominatim-k8s`
+- `helm repo add jobvite-nominatim https://jobvite.github.io/nominatim-k8s`
 - `helm install jobvite-nominatim/nominatim -n nominatim`
 
 #### External Database
