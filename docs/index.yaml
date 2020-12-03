@@ -20,7 +20,7 @@ entries:
     appVersion: 3.5.1
     created: "2020-12-16T22:57:31.673488-08:00"
     description: Nominatim geocoding service
-    digest: a7d0bb1f46c9ba8a791994c3bbcd0fa1a184d0c6f41084825bbe6e87bab83d40
+    digest: 88372069efb5600772684d649f86efbdee25ff755647aa20cfa61a57ed201069
     maintainers:
     - email: mail@peterevans.dev
       name: Peter Evans
