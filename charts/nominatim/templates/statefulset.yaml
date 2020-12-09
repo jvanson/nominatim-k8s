@@ -19,7 +19,7 @@ spec:
     spec:
       securityContext:
         # postgres security group
-        fsGroup: 102
+        fsGroup: 1000
       volumes:
       {{- range $name, $value := .Values.volumes }}
         - name: {{ $name }}
@@ -43,7 +43,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: NOMINATIM_MODE
-          value: RESTORE
+          value: RUN
       {{- range $key, $value := .Values.nominatim.extraEnvVars }}
         - name: {{ $key }}
           value: {{ $value }}
@@ -66,12 +66,14 @@ spec:
           initialDelaySeconds: 30
           timeoutSeconds: 1
       initContainers:
+      {{- if not .Values.nominatim.extraEnvVars.DB_ADDR }}
       - name: volume-permissions
         image: busybox
         command: ['sh', '-c', "chown -R 102:107 /var/lib/postgresql/{{ .Values.postgres.version }}/data"]
         volumeMounts:
           - name: local-data
             mountPath: "/var/lib/postgresql/{{ .Values.postgres.version }}/data"
+      {{- end }}
       - name: "init-{{ include "nominatim.name" . }}"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         env:

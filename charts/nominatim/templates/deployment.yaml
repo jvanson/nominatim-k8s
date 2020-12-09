@@ -1,5 +1,5 @@
-{{- if eq .Values.resourceType "deployment" }}
 ---
+{{- if eq .Values.resourceType "deployment" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,13 +38,15 @@ spec:
             name: {{ $name }}
         {{- end }}
       {{- end }}
+      imagePullSecrets:
+        - name: regcred
       containers:
       - name: {{ include "nominatim.name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: NOMINATIM_MODE
-          value: RESTORE
+          value: RUN
       {{- range $key, $value := .Values.nominatim.extraEnvVars }}
         - name: {{ $key }}
           value: {{ $value }}
