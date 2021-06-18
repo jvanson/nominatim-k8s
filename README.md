@@ -111,7 +111,10 @@ The following table lists the configurable parameters of the PostgreSQL HA chart
 | `volumes.local-data.hostpath_type`                         |                                                                                                                                          | `DirectoryOrCreate`
 | `volumes.local-data.type`                         |                                                                                                                                          | `hostPath`
 | `volumes.nominatim-local-php.type`                         |                                                                                                                                           | `configMap`
-
+| `nodeSelector`                        | Node labels to control pod assignment. https://kubernetes.io/docs/user-guide/node-selection/                                                       | `{}`
+| `tolerations`                         | Node tolerations for scheduling to nodes with taints. https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/                | `[]`
+| `affinity`                            | Affinity and antiaffinity. https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity                     | `{}`
+| `topologySpreadConstraints`           | Topology constraints based on node labels. https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/                     | `[]`
 
 
 ## Thanks

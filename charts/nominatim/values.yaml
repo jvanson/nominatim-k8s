@@ -35,6 +35,15 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 8Gi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+topologySpreadConstraints: []
+
 volumes:
   nominatim-secret-volume:
     secretname: nominatim-storage-secret
