@@ -7,6 +7,7 @@ metadata:
 {{ include "nominatim.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  serviceName: {{ include "nominatim.fullname" . }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nominatim.name" . }}
