@@ -1,6 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "nominatim.fullname" . -}}
-apiVersion: networking.k8s.io/v1beta1
+{{- $ingressSupportsClassName := eq (include "nominatim.ingress.supportsClassName" .) "true" -}}
+{{- $ingressApiVersion := include "nominatim.ingress.apiVersion" . -}}
+apiVersion: {{ $ingressApiVersion }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
@@ -21,6 +23,9 @@ spec:
       secretName: {{ .secretName }}
   {{- end }}
 {{- end }}
+  {{- if and $ingressSupportsClassName .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
